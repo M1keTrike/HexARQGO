@@ -9,9 +9,9 @@ import (
 )
 
 type CreateOrderRequest struct {
-	Actor    string `json:"actor" binding:"required"`
-	Product  int32  `json:"product" binding:"required"`
-	Quantity int32  `json:"quantity" binding:"required"`
+	Actor    int32 `json:"actor" binding:"required"`   
+	Product  int32 `json:"product" binding:"required"`
+	Quantity int32 `json:"quantity" binding:"required"`
 }
 
 type CreateOrderController struct {
@@ -31,7 +31,7 @@ func (cp_c *CreateOrderController) Execute(c *gin.Context) {
 	}
 
 	order := entities.Order{
-		Actor:    req.Actor,
+		Actor:    req.Actor, 
 		Product:  req.Product,
 		Quantity: req.Quantity,
 	}

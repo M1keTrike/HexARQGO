@@ -4,6 +4,7 @@ import (
 	"demo/src/database"
 	orderDeps "demo/src/orders/dependencies"
 	productDeps "demo/src/products/dependencies"
+	userDeps "demo/src/users/dependencies"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -24,5 +25,8 @@ func main() {
 	
 	ordersDeps := orderDeps.NewOrdersDependencies(db)
 	ordersDeps.Execute(r)
+
+	usersDeps := userDeps.NewUsersDependencies(db)
+	usersDeps.Execute(r)
 	r.Run(":8080")
 }

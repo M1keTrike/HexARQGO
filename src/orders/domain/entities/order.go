@@ -2,20 +2,20 @@ package entities
 
 type Order struct {
 	Id       int32
-	Actor    string
+	Actor    int32
 	Product  int32
 	Quantity int32
 }
 
-func NewOrder(id int32, actor string, product int32, quantity int32) *Order {
+func NewOrder(id int32, actor int32, product int32, quantity int32) *Order {
 	return &Order{Id: id, Actor: actor, Product: product, Quantity: quantity}
 }
 
-func (o *Order) GetActor() string {
+func (o *Order) GetActor() int32 { // Ahora devuelve int32
 	return o.Actor
 }
 
-func (o *Order) SetActor(actor string) {
+func (o *Order) SetActor(actor int32) { // Ahora recibe int32
 	o.Actor = actor
 }
 

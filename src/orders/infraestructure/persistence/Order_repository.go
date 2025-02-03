@@ -18,7 +18,7 @@ func (repo *OrderRepository) Save(order *entities.Order) error {
 	query := "INSERT INTO orders (actor, product, quantity) VALUES (?, ?, ?)"
 	_, err := repo.DB.Exec(query, order.Actor, order.Product, order.Quantity)
 	if err != nil {
-		log.Printf("[OrderRepository.Save] Error inserting order: %v", err)
+		log.Printf("[OrderRepository.Save] Error inserting order (Actor: %d, Product: %d, Quantity: %d): %v", order.Actor, order.Product, order.Quantity, err)
 		return err
 	}
 	log.Println("[OrderRepository.Save] Order inserted successfully")
@@ -43,9 +43,9 @@ func (repo *OrderRepository) GetAll() ([]entities.Order, error) {
 		}
 		orders = append(orders, order)
 	}
-	if rows.Err() != nil {
-		log.Printf("[OrderRepository.GetAll] Error iterating over rows: %v", rows.Err())
-		return nil, rows.Err()
+	if err := rows.Err(); err != nil {
+		log.Printf("[OrderRepository.GetAll] Error iterating over rows: %v", err)
+		return nil, err
 	}
 	log.Printf("[OrderRepository.GetAll] Successfully retrieved %d orders", len(orders))
 	return orders, nil
@@ -66,7 +66,7 @@ func (repo *OrderRepository) EditById(id int, updatedOrder *entities.Order) erro
 	query := "UPDATE orders SET actor = ?, product = ?, quantity = ? WHERE id = ?"
 	_, err := repo.DB.Exec(query, updatedOrder.Actor, updatedOrder.Product, updatedOrder.Quantity, id)
 	if err != nil {
-		log.Printf("[OrderRepository.EditById] Error updating order with ID %d: %v", id, err)
+		log.Printf("[OrderRepository.EditById] Error updating order (ID: %d, Actor: %d, Product: %d, Quantity: %d): %v", id, updatedOrder.Actor, updatedOrder.Product, updatedOrder.Quantity, err)
 		return err
 	}
 	log.Printf("[OrderRepository.EditById] Order with ID %d updated successfully", id)

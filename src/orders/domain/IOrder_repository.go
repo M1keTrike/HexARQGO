@@ -5,8 +5,8 @@ import (
 )
 
 type IOrder interface {
-	Save(product *entities.Order) error
+	Save(order *entities.Order) error
 	GetAll() ([]entities.Order, error)
 	DeleteById(id int) error
-	EditById(id int, updatedProduct *entities.Order) error
+	EditById(id int, updatedOrder *entities.Order) error
 }

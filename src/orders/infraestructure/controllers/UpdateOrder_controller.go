@@ -13,10 +13,10 @@ type UpdateOrderByIDController struct {
 }
 
 type UpdateOrderRequest struct {
-	Id       int32  `json:"id" binding:"required"`
-	Actor    string `json:"actor" binding:"required"`
-	Product  int32  `json:"product" binding:"required"`
-	Quantity int32  `json:"quantity" binding:"required"`
+	Id       int32 `json:"id" binding:"required"`
+	Actor    int32 `json:"actor" binding:"required"`   
+	Product  int32 `json:"product" binding:"required"`
+	Quantity int32 `json:"quantity" binding:"required"`
 }
 
 func NewUpdateOrderByIDController(up application.EditOrder) *UpdateOrderByIDController {
@@ -33,7 +33,7 @@ func (up_c *UpdateOrderByIDController) Execute(c *gin.Context) {
 
 	updateOrder := entities.Order{
 		Id:       req.Id,
-		Actor:    req.Actor,
+		Actor:    req.Actor,  
 		Product:  req.Product,
 		Quantity: req.Quantity,
 	}
